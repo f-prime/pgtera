@@ -60,7 +60,7 @@ select pgtera_render(
 
 Which will return
 
-```
+```html
  <html>                                                                
      <title>Home Page</title>                                          
      <body>                                                            
@@ -78,6 +78,6 @@ Which will return
 This will install pgtera to the default Postgres installation on your system. For more detailed installation options, checkout the [cargo-pgrx README](https://github.com/pgcentralfoundation/pgrx/blob/develop/cargo-pgrx/README.md)
 
 1. `cargo install cargo-pgrx`
-2. `cargo pgrx install``
+2. `cargo pgrx install`
 
 
