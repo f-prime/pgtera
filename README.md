@@ -71,10 +71,13 @@ Which will return
                                                                        
      </body>                                                           
  </html>                                                               
- 
-(1 row)
 ```
 
 ## Installation
 
-TODO
+This will install pgtera to the default Postgres installation on your system. For more detailed installation options, checkout the [cargo-pgrx README](https://github.com/pgcentralfoundation/pgrx/blob/develop/cargo-pgrx/README.md)
+
+1. `cargo install cargo-pgrx`
+2. `cargo pgrx install``
+
+
