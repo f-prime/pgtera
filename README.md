@@ -42,7 +42,7 @@ Where `Value` is the [serde_json Value enum](https://docs.rs/serde_json/latest/s
 ```sql
 create extension pgtera;
 
-perform pgtera_set_render_path('~/Project/site/**/*.html');
+perform pgtera_set_render_path('/var/www/**/*.html');
 
 select pgtera_render(
     'index.html',
