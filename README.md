@@ -75,7 +75,7 @@ Which will return
 
 If you would like to write your HTML directly in your SQL, you can use the `pgtera_render_str` function:
 
-```
+```sql
 select pgtera_render_str(
     $template$
     <ul>
