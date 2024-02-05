@@ -34,6 +34,22 @@ fn get_render_path() -> String {
     }
 }
 
+fn build_context(ctx: String) -> (tera::Tera, tera::Context) {
+    let ctx_values: Vec<CtxInput> =
+        serde_json::from_str(ctx.as_str()).expect("Context type is invalid.");
+
+    let rp = get_render_path();
+    let tera = Tera::new(rp.as_str()).expect("There was an issue initializing Tera.");
+
+    let mut context = tera::Context::new();
+
+    ctx_values.iter().for_each(|x| {
+        context.insert(&x.name, &json!(x.value));
+    });
+
+    (tera, context)
+}
+
 #[pg_extern]
 fn pgtera_set_render_path(file_path: &'static str) {
     let query = format!(
@@ -49,21 +65,20 @@ fn pgtera_set_render_path(file_path: &'static str) {
 
 #[pg_extern]
 fn pgtera_render(template_name: &'static str, ctx: String) -> String {
-    let ctx_values: Vec<CtxInput> =
-        serde_json::from_str(ctx.as_str()).expect("Context type is invalid.");
+    let (tera, context) = build_context(ctx);
 
-    let rp = get_render_path();
-    let tera = Tera::new(rp.as_str()).expect("There was an issue initializing Tera.");
-
-    let mut context = tera::Context::new();
-
-    ctx_values.iter().for_each(|x| {
-        context.insert(&x.name, &json!(x.value));
-    });
-
-    let rendered = tera
+    tera
         .render(template_name, &context)
-        .expect("Error while rendering template.");
+        .expect("Error while rendering template.")
 
-    rendered
+}
+
+#[pg_extern]
+fn pgtera_render_str(template: String, ctx: String) -> String {
+    let (mut tera, context) = build_context(ctx);
+
+    tera
+        .render_str(template.as_str(), &context)
+        .expect("Error while rendering string.")
+
 }

@@ -73,6 +73,25 @@ Which will return
  </html>                                                               
 ```
 
+If you would like to write your HTML directly in your SQL, you can use the `pgtera_render_str` function:
+
+```
+select pgtera_render_str(
+    $template$
+    <ul>
+        {% for x in people %}
+            <li>{{ x }}</li>
+        {% endfor %}
+    </ul>
+    $template$,
+    $ctx$
+    [
+        { "name": "people", "value": ["John", "Jake", "James", "Jeff"] }
+    ]
+    $ctx$
+);
+```
+
 ## Installation
 
 This will install pgtera to the default Postgres installation on your system. For more detailed installation options, checkout the [cargo-pgrx README](https://github.com/pgcentralfoundation/pgrx/blob/develop/cargo-pgrx/README.md)
