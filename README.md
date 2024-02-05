@@ -1,6 +1,6 @@
 # PGTera
 
-PGTera is a PostgreSQL extension that provides functions for using the [Tera](https://keats.github.io/tera/) to render HTML templates. 
+PGTera is a PostgreSQL extension that provides functions for using [Tera](https://keats.github.io/tera/) to render HTML templates. 
 
 When used with a tool like [Postgrest](https://postgrest.org/en/stable/), you can serve HTML directly from the database without managing an intermediate layer.
 
